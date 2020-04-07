@@ -25,6 +25,12 @@ async def listen(websocket, path):
         elif msg == 'dw':
             pos = pg.position()
             ctypes.windll.user32.SetCursorPos(pos.x, pos.y + 10)
+        elif msg == 'ul':
+            pos = pg.position()
+            ctypes.windll.user32.SetCursorPos(pos.x - 10, pos.y - 10)
+        elif msg == 'ur':
+            pos = pg.position()
+            ctypes.windll.user32.SetCursorPos(pos.x + 10, pos.y - 10)
         elif msg == 'dl':
             pos = pg.position()
             ctypes.windll.user32.SetCursorPos(pos.x - 10, pos.y + 10)
@@ -39,6 +45,8 @@ async def listen(websocket, path):
             pg.typewrite(msg[4:])
         elif msg.startswith('bs:'):
             pg.hotkey('backspace')
+        elif msg.startswith('screen:'):
+            pg.screenshot('public\\s.png')
         print(f"> {greeting}")
 
 start_server = websockets.serve(listen, "192.168.2.131", PORT)

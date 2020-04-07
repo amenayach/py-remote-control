@@ -27,19 +27,21 @@
         <div><input type="button" data-msg="lc" value="Click" id="btnclick" class="btn-arrow"></div>
         <div><input type="button" data-msg="wl" value="☼" id="btnwl" class="btn-arrow"></div>
         <div><input type="button" data-msg="rc" value="R-Click" id="btnrightclick" class="btn-arrow"></div>
-        <div><input type="button" data-msg="ul" value="Click" id="btnul" class="btn-arrow"></div>
-        <div><input type="button" data-msg="up" value="☼" id="btnup" class="btn-arrow"></div>
-        <div><input type="button" data-msg="ur" value="R-Click" id="btnur" class="btn-arrow"></div>
+        <div><input type="button" data-msg="ul" value="" id="btnul" class="btn-arrow"></div>
+        <div><input type="button" data-msg="up" value="↑" id="btnup" class="btn-arrow"></div>
+        <div><input type="button" data-msg="ur" value="" id="btnur" class="btn-arrow"></div>
         <div><input type="button" data-msg="ml" value="◄" id="btnleft" class="btn-arrow"></div>
         <div><input type="button" data-msg="" value="↕" id="btn" class="btn-arrow"></div>
         <div><input type="button" data-msg="mr" value="►" id="btnright" class="btn-arrow"></div>
         <div><input type="button" data-msg="dl" value="" id="btndl" class="btn-arrow"></div>
-        <div><input type="button" data-msg="dw" value="☼" id="btndown" class="btn-arrow"></div>
+        <div><input type="button" data-msg="dw" value="↓" id="btndown" class="btn-arrow"></div>
         <div><input type="button" data-msg="dr" value="" id="btndr" class="btn-arrow"></div>
     </div>
     <input type="text" id="tbtext" value="test">
     <input type="button" value="Send" id="btnsend">
     <input type="button" value="     ◄     " id="btnbackspace">
+    <input type="button" data-msg="screen:" value="     cam     " id="btnscreenshot">
+    <img src="./s.png" width="100%;" alt="" id="imgscreen">
 
     <script>
         const socket = new WebSocket('ws://192.168.2.131:8000');
@@ -56,7 +58,11 @@
         var btnclick = document.getElementById('btnclick');
         var btnrightclick = document.getElementById('btnrightclick');
         var btndl = document.getElementById('btndl');
+        var btnul = document.getElementById('btnul');
+        var btnur = document.getElementById('btnur');
         var btndr = document.getElementById('btndr');
+        var btnscreenshot = document.getElementById('btnscreenshot');
+        var imgscreen= document.getElementById('imgscreen');
 
         btnleft.addEventListener('click', sendMsg)
         btnright.addEventListener('click', sendMsg)
@@ -66,6 +72,13 @@
         btnrightclick.addEventListener('click', sendMsg)
         btndl.addEventListener('click', sendMsg);
         btndr.addEventListener('click', sendMsg);
+        btnul.addEventListener('click', sendMsg);
+        btnur.addEventListener('click', sendMsg);
+        btnscreenshot.addEventListener('click', ev => {
+            imgscreen.src = '';
+            socket.send(ev.target.getAttribute('data-msg'));
+            setTimeout(() => { imgscreen.src = './s.png'; }, 500);
+        });
 
         socket.addEventListener('open', function (event) {
             socket.send('Hello Server!');
