@@ -25,17 +25,17 @@
 <body>
     <div class="parent">
         <div><input type="button" data-msg="lc" value="Click" id="btnclick" class="btn-arrow"></div>
-        <div><input type="button" data-msg="wl" value="☼" id="btnwl" class="btn-arrow"></div>
+        <div><input type="button" data-msg="wl" value="&#x21D1;" id="btnwl" class="btn-arrow"></div>
         <div><input type="button" data-msg="rc" value="R-Click" id="btnrightclick" class="btn-arrow"></div>
-        <div><input type="button" data-msg="ul" value="" id="btnul" class="btn-arrow"></div>
+        <div><input type="button" data-msg="ul" value="&#x2196;" id="btnul" class="btn-arrow"></div>
         <div><input type="button" data-msg="up" value="↑" id="btnup" class="btn-arrow"></div>
-        <div><input type="button" data-msg="ur" value="" id="btnur" class="btn-arrow"></div>
+        <div><input type="button" data-msg="ur" value="&#x2197;" id="btnur" class="btn-arrow"></div>
         <div><input type="button" data-msg="ml" value="◄" id="btnleft" class="btn-arrow"></div>
-        <div><input type="button" data-msg="" value="↕" id="btn" class="btn-arrow"></div>
+        <div><input type="button" data-msg="wd" value="&#x21D3;" id="btn" class="btn-arrow"></div>
         <div><input type="button" data-msg="mr" value="►" id="btnright" class="btn-arrow"></div>
-        <div><input type="button" data-msg="dl" value="" id="btndl" class="btn-arrow"></div>
+        <div><input type="button" data-msg="dl" value="&#x2199;" id="btndl" class="btn-arrow"></div>
         <div><input type="button" data-msg="dw" value="↓" id="btndown" class="btn-arrow"></div>
-        <div><input type="button" data-msg="dr" value="" id="btndr" class="btn-arrow"></div>
+        <div><input type="button" data-msg="dr" value="&#x2198;" id="btndr" class="btn-arrow"></div>
     </div>
     <input type="text" id="tbtext" value="test">
     <input type="button" value="Send" id="btnsend">
@@ -90,9 +90,9 @@
                 socket.send('bs:');
             });
 
-            // document.body.addEventListener('mousemove', ev => {
-            //     socket.send(ev.clientX + '|' + ev.clientY);
-            // });
+            imgscreen.addEventListener('mousemove', ev => {
+                socket.send(ev.clientX + '|' + ev.clientY);
+            });
         });
 
         socket.addEventListener('close', function (event) {
